@@ -1,3 +1,4 @@
+<img width="1536" height="1024" alt="file_00000000296871faac28cb23b635b555" src="https://github.com/user-attachments/assets/74e61b93-a913-439d-9c26-e7ffb43ecd07" />
 # PLC-SAP-Integration
 PLC data collection and SAP integration using VB.NET
 # PLC-SAP Integration
