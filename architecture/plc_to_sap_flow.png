@@ -1,0 +1,3 @@
+PLC → Ethernet → IPC → Validation → TXT → SAP
+                        ↓
+                      Error / SVC
