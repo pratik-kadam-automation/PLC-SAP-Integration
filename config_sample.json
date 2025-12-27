@@ -1,0 +1,5 @@
+{
+  "plc_ip": "192.168.xxx.xxx",
+  "txt_folder": "PATH/TO/TXT",
+  "error_folder": "PATH/TO/ERROR"
+}
