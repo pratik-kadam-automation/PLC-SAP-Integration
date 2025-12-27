@@ -1,75 +1,108 @@
 <img width="1536" height="1024" alt="file_00000000296871faac28cb23b635b555" src="https://github.com/user-attachments/assets/74e61b93-a913-439d-9c26-e7ffb43ecd07" />
-# PLC-SAP-Integration
-PLC data collection and SAP integration using VB.NET
-# PLC-SAP Integration
 
-# PLC-SAP Integration
+# PLC–SAP Integration (RP2B)
 
-### 📌 Overview
-This project demonstrates a real-world integration between industrial PLC systems and SAP for automated production data transfer.  
-It uses a file-based handshake method to reliably push PLC variables into SAP while minimizing manual data entry.
+## 📌 Overview
+This repository demonstrates a real-world industrial integration where production data is collected from a PLC and prepared for SAP ingestion using a reliable, file-based handshake mechanism.
+
+The solution is designed for shop-floor environments where robustness, traceability, and controlled data transfer are critical.
 
 ---
 
-## 🚀 Key Features
-✅ Collects PLC data over Ethernet  
-✅ Writes production cycle data into structured TXT files  
-✅ Logs historical data for analysis  
-✅ Handles error conditions when communication fails
+## 🏭 System Architecture (High Level)
+
+PLC → Ethernet → Data Collection Service → File Validation → SAP Pickup
+
+- PLC acts as the source of truth
+- Data is captured only at **production cycle completion**
+- SAP reads validated files from a predefined directory
 
 ---
 
-## 🧠 How It Works
+## 📟 PLC Data Mapping (Sanitized)
 
-### 📁 Folder Structure
-| Folder | Purpose |
-|--------|---------|
-| `Error/` | Files generated when PLC communication fails |
-| `TXT/` | Data files created at the end of each production cycle |
-| `SVC/` | Historical data archive |
+| Parameter        | PLC Address        | Description                         |
+|------------------|--------------------|-------------------------------------|
+| Total Weight     | DB100.DBW118       | Accumulated production weight       |
+| Line Speed       | DB100.DBW18        | Current process speed               |
+| Cycle Trigger    | DI 1.0             | Signals end of production cycle     |
 
-### 📟 PLC Variables
-| Variable | PLC Reference | Description |
-|----------|---------------|-------------|
-| Total Weight | `DB100.DBW118` | Accumulated weight |
-| Line Speed | `DB100.DBW18` | Current line speed |
-| Process Sensor | `DI 1.0` | Trigger for cycle end |
+> ⚠️ Note: Addresses shown are for demonstration purposes only.
 
 ---
 
-## 🛠️ Technologies Used
-- **VB.NET** for integration logic  
-- **Ethernet communication** with PLC  
-- File-based data generation (TXT / JSON)
+## 📁 Folder Design & Purpose
+
+| Folder | Description |
+|------|-------------|
+| `Error/` | Created when PLC communication fails or data validation errors occur |
+| `TXT/` | Production data files generated at cycle end (SAP pickup location) |
+| `SVC/` | Historical archive for traceability and audit |
 
 ---
 
-## 🎯 Purpose
-This solution:
-- Removes manual SAP data entry
-- Improves reliability and traceability
-- Prepares factory data for digital transformation
+## 🔁 Data Flow Logic
+
+1. PLC process runs normally
+2. DI 1.0 becomes TRUE → cycle completed
+3. PLC values are read via Ethernet
+4. Data is validated (range, communication status)
+5. TXT file is generated
+6. SAP system picks up the file
+7. Copy is stored in SVC for history
+
+This approach avoids:
+- Duplicate SAP entries
+- Partial or corrupt data uploads
+- Manual operator dependency
 
 ---
 
-## 📌 How to Use (Example)
-1. Clone the repository  
-2. Update `config_sample.json` with your PLC and folder paths  
-3. Build and deploy with VB.NET  
-4. PLC pushes data at cycle end → TXT file generates → SAP picks it up
+## 🛠️ Technology Stack
+
+- PLC: Siemens (S7 family – generic)
+- Communication: Industrial Ethernet
+- Integration Logic: VB.NET (sample structure)
+- SAP Interface: File-based ingestion
+- OS: Windows Industrial PC
 
 ---
 
-## 🧪 Notes
-❗ This is a **sample integration structure**. Replace sample config values before deployment.  
-❗ Do not include real IPs or sensitive credentials in the GitHub repository.
+## 🎯 Why This Design
+
+✔ Simple & robust  
+✔ Easy to audit  
+✔ Works without OPC dependency  
+✔ Industry-proven approach  
+✔ Scalable to MQTT / OPC UA later  
+
+---
+
+## 🔒 Security & IP Protection
+
+- No real PLC IPs included
+- No SAP credentials stored
+- Company-specific logic removed
+- Sample configs only
+
+This repository is intended for **learning, portfolio, and architectural reference**.
+
+---
+
+## 🚀 Future Enhancements
+
+- MQTT-based real-time publishing
+- Python data collector
+- Central historian (InfluxDB)
+- Dashboard (Grafana / Power BI)
 
 ---
 
 ## 📎 License
-This project is for educational and portfolio purposes.
+For educational and portfolio use only.
 
 ---
 
-## 📬 Contact
-If you want help adapting this integration to your environment, feel free to reach out!
+## 📬 Author
+Pratik Kadam  
+Industrial Automation | PLC | SAP | IoT
