@@ -3,22 +3,73 @@
 PLC data collection and SAP integration using VB.NET
 # PLC-SAP Integration
 
-This project focuses on collecting data from PLCs and transferring it to SAP using a file-based handshake method.
+# PLC-SAP Integration
 
-## Technologies
+### 📌 Overview
+This project demonstrates a real-world integration between industrial PLC systems and SAP for automated production data transfer.  
+It uses a file-based handshake method to reliably push PLC variables into SAP while minimizing manual data entry.
 
-Siemens / Mitsubishi PLC
+---
 
-VB.NET
+## 🚀 Key Features
+✅ Collects PLC data over Ethernet  
+✅ Writes production cycle data into structured TXT files  
+✅ Logs historical data for analysis  
+✅ Handles error conditions when communication fails
 
-Ethernet communication
+---
 
-Text / JSON file handling
+## 🧠 How It Works
 
-## Purpose
+### 📁 Folder Structure
+| Folder | Purpose |
+|--------|---------|
+| `Error/` | Files generated when PLC communication fails |
+| `TXT/` | Data files created at the end of each production cycle |
+| `SVC/` | Historical data archive |
 
-- Reduce manual data entry
+### 📟 PLC Variables
+| Variable | PLC Reference | Description |
+|----------|---------------|-------------|
+| Total Weight | `DB100.DBW118` | Accumulated weight |
+| Line Speed | `DB100.DBW18` | Current line speed |
+| Process Sensor | `DI 1.0` | Trigger for cycle end |
 
-Improve data accuracy
+---
 
-Enable automation-ready architecture
+## 🛠️ Technologies Used
+- **VB.NET** for integration logic  
+- **Ethernet communication** with PLC  
+- File-based data generation (TXT / JSON)
+
+---
+
+## 🎯 Purpose
+This solution:
+- Removes manual SAP data entry
+- Improves reliability and traceability
+- Prepares factory data for digital transformation
+
+---
+
+## 📌 How to Use (Example)
+1. Clone the repository  
+2. Update `config_sample.json` with your PLC and folder paths  
+3. Build and deploy with VB.NET  
+4. PLC pushes data at cycle end → TXT file generates → SAP picks it up
+
+---
+
+## 🧪 Notes
+❗ This is a **sample integration structure**. Replace sample config values before deployment.  
+❗ Do not include real IPs or sensitive credentials in the GitHub repository.
+
+---
+
+## 📎 License
+This project is for educational and portfolio purposes.
+
+---
+
+## 📬 Contact
+If you want help adapting this integration to your environment, feel free to reach out!
