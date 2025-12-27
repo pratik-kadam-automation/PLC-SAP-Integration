@@ -1,5 +1,7 @@
 {
   "plc_ip": "192.168.xxx.xxx",
-  "txt_folder": "PATH/TO/TXT",
-  "error_folder": "PATH/TO/ERROR"
+  "cycle_trigger": "DI_1_0",
+  "txt_folder": "D:/PLC_SAP/TXT",
+  "error_folder": "D:/PLC_SAP/Error",
+  "history_folder": "D:/PLC_SAP/SVC"
 }
